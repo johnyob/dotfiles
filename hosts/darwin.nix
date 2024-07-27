@@ -6,7 +6,10 @@
   home-manager,
 }: let
   mkDarwin = system: hostModules: let
-    pkgs = (import nixpkgs) {inherit system;};
+    pkgs = (import nixpkgs) {
+      inherit system;
+      config.allowUnfree = true;
+    };
   in
     nix-darwin.lib.darwinSystem
     {
@@ -20,6 +23,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = {inherit inputs self system pkgs;};
+            home-manager.backupFileExtension = "backup";
           }
         ]
         ++ hostModules;
