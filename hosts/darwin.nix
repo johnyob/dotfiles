@@ -3,6 +3,7 @@
   self,
   nixpkgs,
   nix-darwin,
+  home-manager,
 }: let
   mkDarwin = system: hostModules: let
     pkgs = (import nixpkgs) {inherit system;};
@@ -14,6 +15,12 @@
       modules =
         [
           ./darwin-configuration.nix
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = {inherit inputs self system pkgs;};
+          }
         ]
         ++ hostModules;
     };

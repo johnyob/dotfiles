@@ -12,13 +12,16 @@
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs:
     with inputs;
       {
         darwinConfigurations = (
           import ./hosts/darwin.nix {
-            inherit inputs self nixpkgs nix-darwin;
+            inherit inputs self nixpkgs nix-darwin home-manager;
           }
         );
       }
