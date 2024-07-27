@@ -10,6 +10,7 @@
 
     imports = [
       ../../home/cli/git.nix
+      ../../home/cli/direnv.nix
     ];
   };
 }

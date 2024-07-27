@@ -11,6 +11,10 @@
 
   programs.zsh.enable = true;
 
+  environment.systemPackages = with pkgs; [
+    git
+  ];
+
   services.nix-daemon.enable = true;
   nix = {
     package = pkgs.nix;
