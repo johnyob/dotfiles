@@ -15,7 +15,7 @@ in {
       jnoortheen.nix-ide
     ];
     userSettings = let
-      fontFamily = "'Fira Code Nerd Font', monospace";
+      fontFamily = "Fira Code Nerd Font";
     in {
       # Style
       workbench.colorTheme = "Material Theme Darker";

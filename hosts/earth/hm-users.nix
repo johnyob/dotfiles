@@ -13,6 +13,8 @@
       ../../home/cli/git.nix
       ../../home/cli/direnv.nix
       ../../home/editors/vscode
+      ../../home/cli/starship.nix
+      ../../home/cli/zsh.nix
     ];
   };
 }
