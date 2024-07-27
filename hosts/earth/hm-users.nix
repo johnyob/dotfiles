@@ -9,6 +9,7 @@
     programs.home-manager.enable = true;
 
     imports = [
+      ../../home/fonts.nix
       ../../home/cli/git.nix
       ../../home/cli/direnv.nix
       ../../home/editors/vscode
