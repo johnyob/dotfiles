@@ -3,6 +3,7 @@
 in {
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
-    (nerdfonts.override {fonts = nerd-fonts;}) fira-code
+    (nerdfonts.override {fonts = nerd-fonts;})
+    fira-code
   ];
 }

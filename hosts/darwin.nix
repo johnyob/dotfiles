@@ -1,5 +1,6 @@
 {
   inputs,
+  outputs,
   self,
   nixpkgs,
   nix-darwin,
@@ -14,7 +15,7 @@
     nix-darwin.lib.darwinSystem
     {
       inherit system;
-      specialArgs = {inherit inputs self system pkgs;};
+      specialArgs = {inherit inputs outputs self system pkgs;};
       modules =
         [
           ./darwin-configuration.nix
@@ -22,7 +23,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = {inherit inputs self system pkgs;};
+            home-manager.extraSpecialArgs = {inherit inputs outputs self system pkgs;};
             home-manager.backupFileExtension = "backup";
           }
         ]

@@ -1,22 +1,25 @@
-{pkgs, ...}: {
+{
+  system,
+  inputs,
+  outputs,
+  pkgs,
+  ...
+}: {
   programs.zsh = {
     enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true; 
     syntaxHighlighting.enable = true;
 
     # fzf-tab handles completions
     enableCompletion = false;
 
     initExtra = ''
+      source ~/.p10k.zsh
+
       # Add brew to path
       PATH=/opt/homebrew/bin:$PATH
 
       # Add path for gnu-sed
       PATH=/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH
-
-      # Initialize starship shell
-      eval "$(starship init zsh)"
 
       # opam configuration
       [[ ! -r /Users/ajob410/.opam/opam-init/init.zsh ]] || source /Users/ajob410/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
@@ -56,6 +59,7 @@
         "fzf"
         "fzf-tab"
       ];
+      theme = "zsh-powerlevel10k/powerlevel10k";
 
       custom = let
         plugins = with pkgs; [
@@ -64,8 +68,14 @@
             dir = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
           }
         ];
+
+        themes = [ pkgs.zsh-powerlevel10k ];
       in "${outputs.packages.${system}.oh-my-zsh-custom {inherit plugins themes;}}";
     };
   };
+
+  home.file.".p10k.zsh" = {
+    source = ./.p10k.zsh;
+    executable = true;
   };
 }
