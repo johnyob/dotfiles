@@ -1,10 +1,10 @@
-# 
+#
 # Home manager has several issues around the installation of the
 # dependencies for oh-my-zsh themes and plugins. The best workaround
 # is to define a *custom* oh-my-zsh configuration for plugins and themes
-# 
+#
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Customization.
-# 
+#
 {
   lib,
   stdenv,

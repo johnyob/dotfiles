@@ -23,6 +23,6 @@
       upgrade = true;
       cleanup = "zap";
     };
-    casks = ["iterm2" "raycast" "arc" ];
+    casks = ["raycast" "arc"];
   };
 }

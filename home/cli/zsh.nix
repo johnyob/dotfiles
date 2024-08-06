@@ -69,7 +69,7 @@
           }
         ];
 
-        themes = [ pkgs.zsh-powerlevel10k ];
+        themes = [pkgs.zsh-powerlevel10k];
       in "${outputs.packages.${system}.oh-my-zsh-custom {inherit plugins themes;}}";
     };
   };

@@ -16,6 +16,7 @@
       ../../home/cli/starship.nix
       ../../home/cli/fzf.nix
       ../../home/cli/zsh.nix
+      ../../home/cli/iterm2.nix
     ];
   };
 }
