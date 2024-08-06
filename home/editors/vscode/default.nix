@@ -15,14 +15,21 @@ in {
       jnoortheen.nix-ide
     ];
     userSettings = let
-      fontFamily = "Fira Code Nerd Font";
+      fontFamily = "FiraCode Nerd Font Mono";
     in {
-      # Style
+      # Editor Style
       workbench.colorTheme = "Material Theme Darker";
+      materialTheme.accent = "Orange";
       workbench.iconTheme = "material-icon-theme";
       editor.fontFamily = fontFamily;
-      editor.fontLigatures = true;
+      editor.fontLigatures = false;
+
       terminal.integrated.fontFamily = fontFamily;
+      terminal.integrated.enablePersistentSessions = false;
+
+      # By default Vscode will source ~/.zshrc to read $PATH and cache it.
+      # Instead we prefer the integrated terminal to always load the $PATH
+      terminal.integrated.inheritEnv = false;
 
       # Editor
       terminal.integrated.scrollback = 200000;

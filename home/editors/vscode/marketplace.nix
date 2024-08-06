@@ -38,10 +38,18 @@ in {
     version = "5.8.0";
     sha256 = "sha256-L16dxKXmzK7pI5E4sZ6nBXRazBbg84rp2XY9RljkEuk=";
   };
-  Equinusocio.vsc-material-theme = vscode-utils.extensionFromVscodeMarketplace {
-    name = "vsc-material-theme";
-    publisher = "Equinusocio";
-    version = "34.4.0";
-    sha256 = "sha256-q5GgMVEak9KhY1LwPkIPHgz/j2AMZuz2QQWzLAKkIdU=";
+  Equinusocio.vsc-material-theme = vscode-utils.buildVscodeMarketplaceExtension {
+    mktplcRef = {
+      name = "vsc-material-theme";
+      publisher = "Equinusocio";
+      version = "34.4.0";
+      sha256 = "sha256-q5GgMVEak9KhY1LwPkIPHgz/j2AMZuz2QQWzLAKkIdU=";
+    };
+
+    # https://github.com/NixOS/nixpkgs/blob/e2dd4e18cc1c7314e24154331bae07df76eb582f/pkgs/applications/editors/vscode/extensions/equinusocio.vsc-material-theme/default.nix#L11
+    prePatch = ''
+      substituteInPlace ./build/core/extension-manager.js \
+        --replace-fail "path_1.posix.join(extensionFolderUri.path, env_1.USER_CONFIG_FILE_NAME)" "path_1.posix.join(ExtensionContext.globalStorageUri.fsPath, env_1.USER_CONFIG_FILE_NAME)"
+    '';
   };
 }
