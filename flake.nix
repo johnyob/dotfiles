@@ -17,11 +17,13 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs:
-    with inputs;
+    with inputs; let
+      inherit (self) outputs;
+    in
       {
         darwinConfigurations = (
           import ./hosts/darwin.nix {
-            inherit inputs self nixpkgs nix-darwin home-manager;
+            inherit inputs outputs self nixpkgs nix-darwin home-manager;
           }
         );
       }
@@ -38,5 +40,7 @@
         formatter = fmt.config.build.wrapper;
 
         devShells = import ./shell.nix {inherit pkgs;};
+
+        packages = import ./pkgs {inherit pkgs;};
       });
 }

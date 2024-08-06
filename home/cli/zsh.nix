@@ -5,6 +5,9 @@
     autosuggestion.enable = true; 
     syntaxHighlighting.enable = true;
 
+    # fzf-tab handles completions
+    enableCompletion = false;
+
     initExtra = ''
       # Add brew to path
       PATH=/opt/homebrew/bin:$PATH
@@ -45,5 +48,24 @@
 
       reload = "exec $SHELL -l";
     };
+
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "git"
+        "fzf"
+        "fzf-tab"
+      ];
+
+      custom = let
+        plugins = with pkgs; [
+          {
+            name = "fzf-tab";
+            dir = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
+          }
+        ];
+      in "${outputs.packages.${system}.oh-my-zsh-custom {inherit plugins themes;}}";
+    };
+  };
   };
 }

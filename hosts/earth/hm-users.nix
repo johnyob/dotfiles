@@ -14,6 +14,7 @@
       ../../home/cli/direnv.nix
       ../../home/editors/vscode
       ../../home/cli/starship.nix
+      ../../home/cli/fzf.nix
       ../../home/cli/zsh.nix
     ];
   };
