@@ -18,6 +18,9 @@
       ../../home/cli/zsh.nix
       ../../home/cli/iterm2.nix
       ../../home/cli/thefuck.nix
+      ../../home/cli/bat.nix
+      ../../home/cli/gh.nix
+      ../../home/apps/karabiner.nix
     ];
   };
 }
