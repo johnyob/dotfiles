@@ -12,7 +12,19 @@ in {
       Equinusocio.vsc-material-theme
 
       # Language support
+      # Nix
       jnoortheen.nix-ide
+      
+      # Python
+      ms-python.python
+      ms-python.black-formatter
+
+      # Typst
+      myriad-dreamin.tinymist 
+      tomoki1207.pdf
+
+      # Vim keybindings 
+      vscodevim.vim   
     ];
     userSettings = let
       fontFamily = "FiraCode Nerd Font Mono";
@@ -38,6 +50,9 @@ in {
 
       # Extensions
       errorLens.enabled = true;
+
+      typst.editor.formatOnSave = true;
+      typst.formatterMode = "typstyle";
     };
   };
 }

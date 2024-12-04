@@ -52,4 +52,40 @@ in {
         --replace-fail "path_1.posix.join(extensionFolderUri.path, env_1.USER_CONFIG_FILE_NAME)" "path_1.posix.join(ExtensionContext.globalStorageUri.fsPath, env_1.USER_CONFIG_FILE_NAME)"
     '';
   };
+  ms-python.python = vscode-utils.extensionFromVscodeMarketplace {
+    name = "python";
+    publisher = "ms-python";
+    version = "2024.14.1";
+    sha256 = "sha256-NhE3xATR4D6aAqIT/hToZ/qzMvZxjTmpTyDoIrdvuTE=";
+  };
+  ms-python.black-formatter = vscode-utils.extensionFromVscodeMarketplace {
+    name = "black-formatter";
+    publisher = "ms-python";
+    version = "2024.2.0";
+    sha256 = "sha256-qIO+YqTXjwgznzUlnPSts1R2BM6iN8B9vESkelGPgZM=";
+  };
+  myriad-dreamin.tinymist = vscode-utils.extensionFromVscodeMarketplace {
+    name = "tinymist";
+    publisher = "myriad-dreamin";
+    version = "0.11.32";
+    sha256 = "sha256-CQVujtl1SFcUmEG7O1cvN2gr6v3kcWMMZz+oYEkclKI=";
+  };
+  tomoki1207.pdf = vscode-utils.extensionFromVscodeMarketplace {
+    name = "pdf";
+    publisher = "tomoki1207";
+    version = "1.2.2";
+    sha256 = "sha256-i3Rlizbw4RtPkiEsodRJEB3AUzoqI95ohyqZ0ksROps=";
+  };
+  vscodevim.vim = vscode-utils.extensionFromVscodeMarketplace {
+    name = "vim";
+    publisher = "vscodevim";
+    version = "1.28.1";
+    sha256 = "sha256-cr9gP3/3kB3X8PnhdBUdR0b2ydvqr5RhiFDIZ/6hlTM=";
+  };
+  rust-lang.rust-analyzer = vscode-utils.extensionFromVscodeMarketplace {
+    name = "rust-analyzer"; 
+    publisher = "rust";
+    version = "v0.4.2190"; 
+    sha256 = "";
+  };
 }
