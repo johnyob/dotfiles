@@ -23,7 +23,7 @@
       upgrade = true;
       cleanup = "zap";
     };
-    casks = ["raycast" "arc"];
+    casks = ["raycast" "arc" "microsoft-outlook"];
   };
 
   environment.systemPackages = with pkgs; [
