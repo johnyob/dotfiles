@@ -25,4 +25,12 @@
     };
     casks = ["raycast" "arc"];
   };
+
+  environment.systemPackages = with pkgs; [
+    tailscale
+    slack
+  ];
+
+  services.tailscale.enable = true;
+  services.karabiner-elements.enable = true;
 }
