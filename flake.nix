@@ -15,6 +15,11 @@
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = inputs:
     with inputs; let
@@ -23,7 +28,7 @@
       {
         darwinConfigurations = (
           import ./hosts/darwin.nix {
-            inherit inputs outputs self nixpkgs nix-darwin home-manager;
+            inherit inputs outputs self nixpkgs nix-darwin nixvim home-manager;
           }
         );
       }

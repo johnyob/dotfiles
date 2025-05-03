@@ -5,5 +5,5 @@
 in {
   home.packages = [pkgs.iterm2];
 
-  programs.zsh.initExtraFirst = shellInit "zsh";
+  programs.zsh.initContent = lib.mkBefore (shellInit "zsh");
 }

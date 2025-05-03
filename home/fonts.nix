@@ -1,9 +1,7 @@
-{pkgs, ...}: let
-  nerd-fonts = ["FiraCode"];
-in {
+{pkgs, ...}: {
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
-    (nerdfonts.override {fonts = nerd-fonts;})
+    nerd-fonts.fira-code
     fira-code
   ];
 }

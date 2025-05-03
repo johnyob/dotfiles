@@ -4,55 +4,61 @@ in {
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;
-    extensions = with marketplace; [
-      mkhl.direnv
-      usernamehw.errorlens
-      jgclark.vscode-todo-highlight
-      PKief.material-icon-theme
-      Equinusocio.vsc-material-theme
+    profiles.default = {
+      extensions = with marketplace; [
+        mkhl.direnv
+        usernamehw.errorlens
+        jgclark.vscode-todo-highlight
+        PKief.material-icon-theme
+        Equinusocio.vsc-material-theme
 
-      # Language support
-      # Nix
-      jnoortheen.nix-ide
-      
-      # Python
-      ms-python.python
-      ms-python.black-formatter
+        # Language support
+        # Nix
+        jnoortheen.nix-ide
 
-      # Typst
-      myriad-dreamin.tinymist 
-      tomoki1207.pdf
+        # Python
+        ms-python.python
+        ms-python.black-formatter
 
-      # Vim keybindings 
-      vscodevim.vim   
-    ];
-    userSettings = let
-      fontFamily = "FiraCode Nerd Font Mono";
-    in {
-      # Editor Style
-      workbench.colorTheme = "Material Theme Darker";
-      materialTheme.accent = "Orange";
-      workbench.iconTheme = "material-icon-theme";
-      editor.fontFamily = fontFamily;
-      editor.fontLigatures = false;
+        # Typst
+        myriad-dreamin.tinymist
+        # tomoki1207.pdf
 
-      terminal.integrated.fontFamily = fontFamily;
-      terminal.integrated.enablePersistentSessions = false;
+        # Vim keybindings
+        vscodevim.vim
 
-      # By default Vscode will source ~/.zshrc to read $PATH and cache it.
-      # Instead we prefer the integrated terminal to always load the $PATH
-      terminal.integrated.inheritEnv = false;
+        # Latex
+        james-yu.latex-workshop
+      ];
 
-      # Editor
-      terminal.integrated.scrollback = 200000;
-      editor.tabSize = 2;
-      git.autoFetch = true;
+      userSettings = let
+        fontFamily = "FiraCode Nerd Font Mono";
+      in {
+        # Editor Style
+        workbench.colorTheme = "Material Theme Darker";
+        materialTheme.accent = "Orange";
+        workbench.iconTheme = "material-icon-theme";
+        editor.fontFamily = fontFamily;
+        editor.fontLigatures = false;
 
-      # Extensions
-      errorLens.enabled = true;
+        terminal.integrated.fontFamily = fontFamily;
+        terminal.integrated.enablePersistentSessions = false;
 
-      typst.editor.formatOnSave = true;
-      typst.formatterMode = "typstyle";
+        # By default Vscode will source ~/.zshrc to read $PATH and cache it.
+        # Instead we prefer the integrated terminal to always load the $PATH
+        terminal.integrated.inheritEnv = false;
+
+        # Editor
+        terminal.integrated.scrollback = 200000;
+        editor.tabSize = 2;
+        git.autoFetch = true;
+
+        # Extensions
+        errorLens.enabled = true;
+
+        typst.editor.formatOnSave = true;
+        typst.formatterMode = "typstyle";
+      };
     };
   };
 }

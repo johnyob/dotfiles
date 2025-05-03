@@ -67,8 +67,8 @@ in {
   myriad-dreamin.tinymist = vscode-utils.extensionFromVscodeMarketplace {
     name = "tinymist";
     publisher = "myriad-dreamin";
-    version = "0.11.32";
-    sha256 = "sha256-CQVujtl1SFcUmEG7O1cvN2gr6v3kcWMMZz+oYEkclKI=";
+    version = "0.13.8";
+    sha256 = "sha256-OB+e4lerPONs7QDqHJO3pqU1yQ3BvM2k+Tz998ibmHo=";
   };
   tomoki1207.pdf = vscode-utils.extensionFromVscodeMarketplace {
     name = "pdf";
@@ -82,10 +82,10 @@ in {
     version = "1.28.1";
     sha256 = "sha256-cr9gP3/3kB3X8PnhdBUdR0b2ydvqr5RhiFDIZ/6hlTM=";
   };
-  rust-lang.rust-analyzer = vscode-utils.extensionFromVscodeMarketplace {
-    name = "rust-analyzer"; 
-    publisher = "rust";
-    version = "v0.4.2190"; 
-    sha256 = "";
+  james-yu.latex-workshop = vscode-utils.extensionFromVscodeMarketplace {
+    name = "latex-workshop";
+    publisher = "James-Yu";
+    version = "10.8.0";
+    sha256 = "sha256-tdQ3Z/OfNH0UgpHcn8Zq5rQxoetD61dossEh8hRygew=";
   };
 }

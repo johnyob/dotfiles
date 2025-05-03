@@ -1,5 +1,4 @@
-{pkgs,...}:
-{
+{pkgs, ...}: {
   # A cat(1) clone with wings
   programs.bat = {
     enable = true;
@@ -17,5 +16,5 @@
     bat-extras.batdiff # <- Diff a file against the current git index, or display the diff between two files.
     bat-extras.batwatch # <- Watch for changes in files or command output, and print them with bat.
     bat-extras.prettybat # <- Pretty-print source code and highlight it with bat.
-  ]; 
+  ];
 }

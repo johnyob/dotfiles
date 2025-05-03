@@ -2,6 +2,8 @@
 # Specific system configuration settings for Earth (MacBook Pro (14-inch, 2021))
 #
 {pkgs, ...}: {
+  imports = [../../home/editors/nvim];
+
   users.users = import ./users.nix {inherit pkgs;};
   home-manager.users = import ./hm-users.nix;
 
@@ -29,8 +31,9 @@
   environment.systemPackages = with pkgs; [
     tailscale
     slack
+    rustup
   ];
 
   services.tailscale.enable = true;
-  services.karabiner-elements.enable = true;
+  # services.karabiner-elements.enable = true;
 }

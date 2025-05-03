@@ -5,6 +5,7 @@
   nixpkgs,
   nix-darwin,
   home-manager,
+  nixvim,
 }: let
   mkDarwin = system: hostModules: let
     pkgs = (import nixpkgs) {
@@ -20,6 +21,7 @@
         [
           ./darwin-configuration.nix
           home-manager.darwinModules.home-manager
+          nixvim.nixDarwinModules.nixvim
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
