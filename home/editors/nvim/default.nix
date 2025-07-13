@@ -7,6 +7,7 @@
 }: {
   environment.systemPackages = with pkgs; [
     ripgrep
+    texpresso
   ];
 
   programs.nixvim = {
@@ -14,6 +15,10 @@
     viAlias = true;
     vimAlias = true;
     enableMan = false;
+
+    globals = {
+      mapleader = " ";
+    }; 
 
     opts = {
       number = true; # Show line numbers
@@ -23,6 +28,8 @@
     };
 
     plugins = {
+      telescope.enable = true;
+      texpresso.enable = true;
     };
 
     autoCmd = [
@@ -39,27 +46,25 @@
     ];
 
     keymaps = [
+      # telescope
       {
-        key = "<Tab>";
-        mode = ["i" "s"];
-        action = ''
-           function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expandable() then
-              luasnip.expand()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            elseif check_backspace() then
-              fallback()
-            else
-              fallback()
-            end
-          end
-        '';
+        action = "<cmd>Telescope find_files<CR>";
+        key = "<leader>ff";
+      }
+      {
+        action = "<cmd>Telescope live_grep<CR>";
+        key = "<leader>fg";
+      }
+      {
+        action = "<cmd>Telescope buffers<CR>";
+        key = "<leader>fb";
+      }
+      {
+        action = "<cmd>Telescope help_tags<CR>";
+        key = "<leader>fh";
       }
     ];
-  };
+};
 
   home-manager.users."ajob410" = {
     home.file.".config/nvim/init.lua".source = ./config/init.vim;

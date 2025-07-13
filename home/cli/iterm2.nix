@@ -1,4 +1,4 @@
-{pkgs, ...}: let
+{pkgs, lib, ...}: let
   shellInit = shell: ''
     source ${pkgs.iterm2}/Applications/iTerm2.app/Contents/Resources/iterm2_shell_integration.${shell}
   '';
