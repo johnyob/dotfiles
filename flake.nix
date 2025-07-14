@@ -21,6 +21,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # This revision of Stylix is needed to avoid the following issue: 
+    # https://github.com/nix-community/stylix/issues/1693. 
+    stylix = {
+      url = "github:danth/stylix/a14e525723c1c837b2ceacd8a37cba1f0b5e76c2";
+      inputs.home-manager.follows = "home-manager";
+    };
+
     haumea = {
       url = "github:nix-community/haumea/v0.2.2";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,7 +51,9 @@
       sharedModules =
         allModulePathsIn ./modules/shared;
 
-      homeModules = [inputs.nixvim.homeModules.nixvim] ++ allModulePathsIn ./modules/home;
+      homeModules = [nixvim.homeModules.nixvim
+          stylix.homeModules.stylix 
+       ]  ++ allModulePathsIn ./modules/home;
 
       darwinModules =
         [
