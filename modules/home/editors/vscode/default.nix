@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  marketplace = pkgs.callPackage ./marketplace.nix {};
+  marketplace = pkgs.callPackage ./_marketplace.nix {};
 in {
   programs.vscode = {
     enable = true;
@@ -9,8 +9,8 @@ in {
         mkhl.direnv
         usernamehw.errorlens
         jgclark.vscode-todo-highlight
-        PKief.material-icon-theme
-        Equinusocio.vsc-material-theme
+        # PKief.material-icon-theme
+        # Equinusocio.vsc-material-theme
 
         # Language support
         # Nix

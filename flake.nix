@@ -20,17 +20,85 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    haumea = {
+      url = "github:nix-community/haumea/v0.2.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = inputs:
     with inputs; let
-      inherit (self) outputs;
+      inherit (nixpkgs) lib;
+
+      loadModulePaths = path:
+        haumea.lib.load {
+          src = path;
+          loader = haumea.lib.loaders.path;
+        };
+
+      # Recursively collect all paths in a given directory
+      # (typically module paths)
+      allModulePathsIn = path:
+        lib.attrsets.collect builtins.isPath (loadModulePaths path);
+
+      sharedModules =
+        allModulePathsIn ./modules/shared;
+
+      homeModules = [inputs.nixvim.homeModules.nixvim] ++ allModulePathsIn ./modules/home;
+
+      darwinModules =
+        [
+          home-manager.darwinModules.home-manager
+        ]
+        ++ sharedModules
+        ++ allModulePathsIn ./modules/darwin;
+
+      mkDarwin = system: path: let
+        modules = loadModulePaths path;
+
+        userModules = modules.home or {};
+        hostModules =
+          lib.attrsets.collect builtins.isPath
+          (builtins.removeAttrs modules ["home"]);
+
+        hmUsers =
+          lib.attrsets.mapAttrs
+          (
+            username: config: {...}: {
+              imports = homeModules ++ [config];
+              home.username = username;
+            }
+          )
+          userModules;
+
+        users =
+          lib.attrsets.mapAttrs
+          (
+            username: _: {
+              home = "/Users/${username}";
+            }
+          )
+          userModules;
+      in
+        nix-darwin.lib.darwinSystem {
+          specialArgs = {inherit inputs self system;};
+          modules =
+            darwinModules
+            ++ hostModules
+            ++ [
+              {
+                nixpkgs.hostPlatform = system;
+                home-manager.extraSpecialArgs = {inherit inputs self system;};
+                home-manager.users = hmUsers;
+                users.users = users;
+              }
+            ];
+        };
     in
       {
-        darwinConfigurations = (
-          import ./hosts/darwin.nix {
-            inherit inputs outputs self nixpkgs nix-darwin nixvim home-manager;
-          }
-        );
+        darwinConfigurations = {
+          earth = mkDarwin "aarch64-darwin" ./hosts/earth;
+        };
       }
       // flake-utils.lib.eachDefaultSystem (system: let
         pkgs = nixpkgs.legacyPackages.${system};

@@ -1,7 +1,7 @@
 {
   system,
   inputs,
-  outputs,
+  self,
   pkgs,
   ...
 }: {
@@ -20,9 +20,6 @@
 
       # Add path for gnu-sed
       PATH=/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH
-
-      # opam configuration
-      [[ ! -r /Users/ajob410/.opam/opam-init/init.zsh ]] || source /Users/ajob410/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
     '';
 
     shellAliases = {
@@ -70,7 +67,7 @@
         ];
 
         themes = [pkgs.zsh-powerlevel10k];
-      in "${outputs.packages.${system}.oh-my-zsh-custom {inherit plugins themes;}}";
+      in "${self.outputs.packages.${system}.oh-my-zsh-custom {inherit plugins themes;}}";
     };
   };
 

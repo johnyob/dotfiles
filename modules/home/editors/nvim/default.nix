@@ -1,11 +1,9 @@
 {
-  config,
   lib,
-  system,
   pkgs,
   ...
 }: {
-  environment.systemPackages = with pkgs; [
+  home.packages = with pkgs; [
     ripgrep
     texpresso
   ];
@@ -18,7 +16,7 @@
 
     globals = {
       mapleader = " ";
-    }; 
+    };
 
     opts = {
       number = true; # Show line numbers
@@ -64,9 +62,7 @@
         key = "<leader>fh";
       }
     ];
-};
-
-  home-manager.users."ajob410" = {
-    home.file.".config/nvim/init.lua".source = ./config/init.vim;
   };
+
+  # home.file.".config/nvim/init.lua".source = ./config/init.vim;
 }
