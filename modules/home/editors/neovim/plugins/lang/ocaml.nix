@@ -2,13 +2,11 @@
   programs.nixvim = {
     plugins = {
       lsp.servers = {
-        nixd = {
+        ocamllsp = {
           enable = true;
+
+          # Allow direnv to override the package
           packageFallback = true;
-          settings = {
-            nixpkgs.expr = "import <nixpkgs> {}";
-            formatting.command = ["alejandra"];
-          };
         };
       };
     };
