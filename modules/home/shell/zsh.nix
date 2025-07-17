@@ -12,7 +12,7 @@
     # fzf-tab handles completions
     enableCompletion = false;
 
-    initExtra = ''
+    initContent = ''
       source ~/.p10k.zsh
 
       # Add brew to path
@@ -20,6 +20,11 @@
 
       # Add path for gnu-sed
       PATH=/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH
+    '';
+
+    loginExtra = ''
+      # Execute fetch on login
+      fetch
     '';
 
     shellAliases = {

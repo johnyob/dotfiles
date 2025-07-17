@@ -21,8 +21,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # This revision of Stylix is needed to avoid the following issue: 
-    # https://github.com/nix-community/stylix/issues/1693. 
+    # This revision of Stylix is needed to avoid the following issue:
+    # https://github.com/nix-community/stylix/issues/1693.
     stylix = {
       url = "github:danth/stylix/a14e525723c1c837b2ceacd8a37cba1f0b5e76c2";
       inputs.home-manager.follows = "home-manager";
@@ -51,9 +51,12 @@
       sharedModules =
         allModulePathsIn ./modules/shared;
 
-      homeModules = [nixvim.homeModules.nixvim
-          stylix.homeModules.stylix 
-       ]  ++ allModulePathsIn ./modules/home;
+      homeModules =
+        [
+          nixvim.homeModules.nixvim
+          stylix.homeModules.stylix
+        ]
+        ++ allModulePathsIn ./modules/home;
 
       darwinModules =
         [
@@ -62,14 +65,7 @@
         ++ sharedModules
         ++ allModulePathsIn ./modules/darwin;
 
-      mkDarwin = system: path: let
-        modules = loadModulePaths path;
-
-        userModules = modules.home or {};
-        hostModules =
-          lib.attrsets.collect builtins.isPath
-          (builtins.removeAttrs modules ["home"]);
-
+      mkUsers = userModules: let
         hmUsers =
           lib.attrsets.mapAttrs
           (
@@ -88,6 +84,18 @@
             }
           )
           userModules;
+      in {
+        home-manager.users = hmUsers;
+        users.users = users;
+      };
+
+      mkDarwin = system: path: let
+        modules = loadModulePaths path;
+
+        userModules = modules.home or {};
+        hostModules =
+          lib.attrsets.collect builtins.isPath
+          (builtins.removeAttrs modules ["home"]);
       in
         nix-darwin.lib.darwinSystem {
           specialArgs = {inherit inputs self system;};
@@ -95,11 +103,10 @@
             darwinModules
             ++ hostModules
             ++ [
+              (mkUsers userModules)
               {
                 nixpkgs.hostPlatform = system;
                 home-manager.extraSpecialArgs = {inherit inputs self system;};
-                home-manager.users = hmUsers;
-                users.users = users;
               }
             ];
         };

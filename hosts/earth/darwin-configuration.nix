@@ -1,4 +1,8 @@
-{ self, pkgs, ... }: {
+{
+  self,
+  pkgs,
+  ...
+}: {
   system.primaryUser = "ajob410";
 
   system.stateVersion = 4;
